@@ -1,1 +1,4056 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Carbon</title>
+
+<style>
+:root{
+  --purple:#6d35e8;
+  --purple2:#8557ef;
+  --deep:#5420bd;
+  --light:#f6f3ff;
+  --lav:#eee8ff;
+  --text:#17152a;
+  --muted:#77748a;
+  --line:#ebe8f3;
+  --gold:#d6a928;
+  --gold2:#f0c958;
+  --green:#1aa86b;
+  --red:#d94757;
+  --white:#fff;
+  --shadow:0 12px 35px rgba(66,35,150,.10);
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:#f3f1f8;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body{
+  min-height:100vh;
+}
+
+button{
+  font:inherit;
+  border:0;
+  cursor:pointer;
+}
+
+#app{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+}
+
+.phone{
+  width:100%;
+  max-width:460px;
+  min-height:100vh;
+  background:#fff;
+  position:relative;
+  overflow-x:hidden;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+  padding-bottom:100px;
+}
+
+.screen.active{
+  display:block;
+  animation:screenFade .28s ease;
+}
+
+@keyframes screenFade{
+  from{
+    opacity:0;
+    transform:translateY(5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =====================================================
+   ADDED PURPLE PROFILE LOGIN PAGE
+===================================================== */
+
+#profileLogin{
+  min-height:100vh;
+  padding:0;
+  background:linear-gradient(145deg,#5420bd 0%,#6d35e8 48%,#8557ef 100%);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.profile-login-content{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:45px 28px;
+  position:relative;
+  z-index:2;
+}
+
+.profile-login-brand{
+  position:absolute;
+  top:58px;
+  left:0;
+  right:0;
+  font-size:38px;
+  font-weight:800;
+  letter-spacing:-2px;
+  color:#fff;
+}
+
+.profile-login-orbit{
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.profile-login-orbit:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,.28);
+  box-shadow:
+    0 0 0 10px rgba(255,255,255,.05),
+    0 0 45px rgba(255,255,255,.18);
+  animation:loginRingRotate 4s linear infinite;
+}
+
+.profile-login-orbit:after{
+  content:"";
+  position:absolute;
+  inset:17px;
+  border-radius:50%;
+  border:2px dashed rgba(255,255,255,.45);
+  animation:loginRingRotateReverse 7s linear infinite;
+}
+
+.profile-login-photo-ring{
+  width:185px;
+  height:185px;
+  padding:6px;
+  border-radius:50%;
+  background:conic-gradient(
+    #fff 0deg,
+    #c7a9ff 70deg,
+    #fff 145deg,
+    #8e5aee 220deg,
+    #fff 300deg,
+    #fff 360deg
+  );
+  animation:loginPhotoRing 4s linear infinite;
+  position:relative;
+  z-index:3;
+  box-shadow:0 15px 45px rgba(40,10,110,.3);
+}
+
+.profile-login-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:50%;
+  border:5px solid #fff;
+}
+
+.profile-login-title{
+  margin-top:38px;
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:-.8px;
+}
+
+.profile-login-subtitle{
+  margin-top:9px;
+  font-size:16px;
+  color:rgba(255,255,255,.82);
+}
+
+.profile-login-button{
+  margin-top:34px;
+  min-width:185px;
+  padding:15px 25px;
+  border-radius:18px;
+  background:#fff;
+  color:#6425d8;
+  font-weight:800;
+  font-size:17px;
+  box-shadow:0 12px 30px rgba(35,10,100,.25);
+}
+
+@keyframes loginRingRotate{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes loginRingRotateReverse{
+  to{
+    transform:rotate(-360deg);
+  }
+}
+
+@keyframes loginPhotoRing{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* =====================================================
+   LOGIN / WELCOME
+===================================================== */
+
+#welcome{
+  background:#fff;
+  min-height:100vh;
+  padding:0 26px 28px;
+  position:relative;
+}
+
+.login-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:58px;
+}
+
+.carbon-brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#4f18ca;
+  font-weight:800;
+  font-size:42px;
+  letter-spacing:-2.5px;
+}
+
+.carbon-mark{
+  width:51px;
+  height:51px;
+  position:relative;
+  flex:none;
+}
+
+.carbon-mark:before,
+.carbon-mark:after{
+  content:"";
+  position:absolute;
+  inset:5px;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+
+.carbon-mark:before{
+  background:linear-gradient(135deg,#7f55dc 0 45%,#4f18ca 45% 100%);
+}
+
+.carbon-mark:after{
+  background:linear-gradient(135deg,transparent 0 38%,#fff 38% 62%,transparent 62%);
+  opacity:.95;
+}
+
+.help-circle{
+  width:47px;
+  height:47px;
+  border-radius:50%;
+  background:#d9d9df;
+  color:#696774;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:29px;
+  font-weight:600;
+}
+
+.login-content{
+  text-align:center;
+  padding-top:145px;
+}
+
+.login-content h1{
+  font-size:45px;
+  line-height:1.02;
+  letter-spacing:-1.8px;
+  margin:0;
+  color:#050505;
+}
+
+.login-subtitle{
+  margin-top:108px;
+  color:#92919a;
+  font-size:27px;
+}
+
+.pin-row{
+  display:flex;
+  justify-content:center;
+  gap:4px;
+  margin-top:39px;
+}
+
+.pin-box{
+  width:58px;
+  height:103px;
+  border-radius:9px;
+  background:#f0f0f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  color:#383747;
+}
+
+.forgot-pin{
+  display:inline-block;
+  margin-top:36px;
+  color:var(--purple);
+  font-size:28px;
+  background:transparent;
+}
+
+.face-id-trigger{
+  margin:82px auto 0;
+  background:transparent;
+  color:#777485;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
+
+.face-icon{
+  width:64px;
+  height:64px;
+  position:relative;
+  color:#9a72df;
+}
+
+.face-icon span{
+  position:absolute;
+  width:19px;
+  height:19px;
+  border-color:currentColor;
+  border-style:solid;
+}
+
+.face-icon .tl{
+  left:2px;
+  top:2px;
+  border-width:4px 0 0 4px;
+  border-radius:10px 0 0 0;
+}
+
+.face-icon .tr{
+  right:2px;
+  top:2px;
+  border-width:4px 4px 0 0;
+  border-radius:0 10px 0 0;
+}
+
+.face-icon .bl{
+  left:2px;
+  bottom:2px;
+  border-width:0 0 4px 4px;
+  border-radius:0 0 0 10px;
+}
+
+.face-icon .br{
+  right:2px;
+  bottom:2px;
+  border-width:0 4px 4px 0;
+  border-radius:0 0 10px 0;
+}
+
+.face-icon .eye1,
+.face-icon .eye2{
+  width:4px;
+  height:14px;
+  background:currentColor;
+  border:0;
+  border-radius:4px;
+  top:23px;
+}
+
+.face-icon .eye1{
+  left:23px;
+}
+
+.face-icon .eye2{
+  right:23px;
+}
+
+.face-icon .nose{
+  width:4px;
+  height:16px;
+  background:currentColor;
+  border:0;
+  left:30px;
+  top:27px;
+  border-radius:4px;
+}
+
+.face-icon .smile{
+  width:23px;
+  height:12px;
+  border-width:0 0 4px 0;
+  border-radius:0 0 20px 20px;
+  left:21px;
+  top:39px;
+}
+
+.face-label{
+  font-size:25px;
+}
+
+.signout{
+  position:absolute;
+  bottom:67px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:var(--purple);
+  font-size:25px;
+  background:transparent;
+}
+
+/* =====================================================
+   FACE ID
+===================================================== */
+
+.face-modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:rgba(0,0,0,.72);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.face-modal.show{
+  display:flex;
+}
+
+.face-card{
+  width:300px;
+  height:305px;
+  border-radius:20px;
+  background:#55565b;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.35);
+  animation:facePop .25s ease;
+}
+
+@keyframes facePop{
+  from{
+    transform:scale(.85);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.face-scan{
+  width:105px;
+  height:105px;
+  position:relative;
+  margin-bottom:22px;
+}
+
+.face-scan:before{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border:5px solid #ddd;
+  border-radius:25px;
+  clip-path:polygon(
+    0 0,30% 0,30% 6%,6% 6%,6% 30%,0 30%,
+    0 70%,6% 70%,6% 94%,30% 94%,30% 100%,0 100%,
+    100% 100%,70% 100%,70% 94%,94% 94%,94% 70%,100% 70%,
+    100% 30%,94% 30%,94% 6%,70% 6%,70% 0
+  );
+  animation:scanPulse 1.1s infinite ease-in-out;
+}
+
+@keyframes scanPulse{
+  0%,100%{
+    opacity:.45;
+    transform:scale(.95);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.03);
+  }
+}
+
+.face-card-title{
+  font-size:30px;
+  font-weight:600;
+}
+
+/* =====================================================
+   HOME
+===================================================== */
+
+.home-page{
+  padding:22px 16px 110px;
+  background:#fff;
+}
+
+.home-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+
+.user-heading{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.profile-wrap{
+  position:relative;
+  width:70px;
+  height:70px;
+  flex:none;
+}
+
+.profile-ring{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  padding:4px;
+  background:conic-gradient(
+    var(--purple) 0deg,
+    #a36af2 90deg,
+    var(--purple) 180deg,
+    #6425dc 270deg,
+    var(--purple) 360deg
+  );
+  animation:ringRotate 4s linear infinite;
+}
+
+@keyframes ringRotate{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.profile-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  display:block;
+  border:3px solid #fff;
+}
+
+.profile-badge{
+  position:absolute;
+  right:-1px;
+  bottom:-1px;
+  width:31px;
+  height:31px;
+  border-radius:10px;
+  background:#d92d83;
+  color:#fff;
+  border:3px solid #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:18px;
+  box-shadow:0 3px 8px rgba(0,0,0,.16);
+  animation:badgePulse 2s infinite;
+}
+
+@keyframes badgePulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+
+.user-heading h2{
+  margin:0;
+  font-size:31px;
+  letter-spacing:-1px;
+}
+
+.home-actions{
+  display:flex;
+  gap:10px;
+}
+
+.help-pill,
+.notify-btn{
+  height:62px;
+  border-radius:25px;
+  background:#efedff;
+  color:#767287;
+}
+
+.help-pill{
+  padding:0 19px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:21px;
+}
+
+.headset{
+  font-size:31px;
+}
+
+.help-word{
+  background:#db3287;
+  color:#fff;
+  border-radius:18px;
+  padding:5px 13px;
+}
+
+.notify-btn{
+  width:62px;
+  position:relative;
+  font-size:29px;
+}
+
+.notify-dot{
+  position:absolute;
+  width:13px;
+  height:13px;
+  background:#df3287;
+  border:2px solid #efedff;
+  border-radius:50%;
+  top:9px;
+  right:10px;
+  animation:notifyPulse 1.8s infinite;
+}
+
+@keyframes notifyPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+}
+
+/* =====================================================
+   HOME MOVING MESSAGE
+===================================================== */
+
+.smart-banner{
+  margin:0 0 18px;
+  border-radius:21px;
+  overflow:hidden;
+  background:linear-gradient(120deg,#5420bd,#8557ef,#6d35e8);
+  color:#fff;
+  box-shadow:0 14px 30px rgba(92,44,208,.18);
+  position:relative;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+}
+
+.smart-track{
+  white-space:nowrap;
+  display:inline-block;
+  padding-left:100%;
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:.2px;
+  animation:smartMove 11s linear infinite;
+}
+
+@keyframes smartMove{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-100%);
+  }
+}
+
+.hero-card{
+  background:linear-gradient(135deg,#6d35e8,#8557ef);
+  border-radius:27px;
+  color:#fff;
+  padding:24px;
+  box-shadow:0 18px 35px rgba(92,44,208,.22);
+}
+
+.hero-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.hero-brand{
+  font-size:25px;
+  font-weight:800;
+}
+
+.hero-label{
+  opacity:.85;
+  font-size:14px;
+  margin-top:27px;
+}
+
+.hero-balance{
+  font-size:38px;
+  font-weight:800;
+  margin-top:4px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+
+.hero-actions button{
+  flex:1;
+  border-radius:15px;
+  padding:14px 10px;
+  font-weight:700;
+}
+
+.add-money{
+  background:#fff;
+  color:var(--purple);
+}
+
+.send-money{
+  background:rgba(255,255,255,.17);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.4);
+}
+
+.balance-stack{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:11px;
+  margin-top:18px;
+}
+
+.balance-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:17px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.balance-card small{
+  color:var(--muted);
+}
+
+.balance-card strong{
+  font-size:19px;
+  display:block;
+  margin-top:3px;
+}
+
+.balance-card{
+  cursor:pointer;
+}
+
+.section{
+  margin-top:25px;
+}
+
+.section-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:13px;
+}
+
+.section-heading h3{
+  margin:0;
+  font-size:21px;
+}
+
+.section-heading button{
+  background:transparent;
+  color:var(--purple);
+  font-size:16px;
+  font-weight:600;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.quick-item{
+  min-height:92px;
+  background:#faf9fe;
+  border:1px solid #f0eef7;
+  border-radius:17px;
+  padding:11px 5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#686477;
+  font-size:12px;
+}
+
+.quick-icon{
+  font-size:25px;
+}
+
+.info-card{
+  border-radius:20px;
+  background:#f5f1ff;
+  padding:19px;
+}
+
+.loan-activity{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.activity-row{
+  padding:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+
+.activity-row:last-child{
+  border-bottom:0;
+}
+
+.activity-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.activity-icon{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:#efeaff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.need-help{
+  background:#17152a;
+  color:#fff;
+  border-radius:21px;
+  padding:21px;
+}
+
+/* =====================================================
+   TRANSACTIONS PREVIEW
+===================================================== */
+
+.transactions-preview{
+  background:#fff;
+  border:1px solid #eeeaf5;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.transaction-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 20px 12px;
+}
+
+.transaction-head h3{
+  margin:0;
+  font-size:22px;
+}
+
+.view-all{
+  background:transparent;
+  color:#6230c9;
+  font-size:18px;
+  font-weight:500;
+}
+
+.preview-row{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:18px 20px;
+  border-top:1px solid var(--line);
+  cursor:pointer;
+}
+
+.tx-icon{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  flex:none;
+}
+
+.tx-out{
+  background:#ffaaa1;
+  color:#d73327;
+}
+
+.tx-in{
+  background:#a6e59f;
+  color:#138a32;
+}
+
+.preview-main{
+  min-width:0;
+  flex:1;
+}
+
+.preview-title{
+  font-size:15px;
+  font-weight:650;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.preview-date{
+  color:#8a8797;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.preview-amount{
+  font-weight:700;
+  white-space:nowrap;
+}
+
+/* =====================================================
+   INNER PAGES
+===================================================== */
+
+.inner-page{
+  padding:25px 18px 110px;
+  background:#fff;
+  min-height:100vh;
+}
+
+.page-header{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-bottom:23px;
+}
+
+.back-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#f3f1f8;
+  color:#5d596c;
+  font-size:25px;
+}
+
+.page-header h1{
+  margin:0;
+  font-size:27px;
+}
+
+.simple-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  margin-bottom:14px;
+}
+
+.simple-card h3{
+  margin:0 0 7px;
+}
+
+.simple-card p{
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.copy-account{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#f6f2ff;
+  border:1px solid #e8defd;
+  border-radius:16px;
+  padding:15px;
+  margin-top:14px;
+}
+
+.copy-account-number{
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.copy-button{
+  background:var(--purple);
+  color:#fff;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:700;
+}
+
+/* =====================================================
+   TRANSACTIONS
+===================================================== */
+
+.transaction-tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  background:#f6f2ff;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+
+.transaction-tab{
+  padding:14px 5px;
+  background:transparent;
+  color:var(--purple);
+  font-weight:600;
+}
+
+.transaction-tab.active{
+  background:var(--purple);
+  color:#fff;
+}
+
+.tx-date-heading{
+  color:#718096;
+  font-size:18px;
+  font-weight:700;
+  margin:24px 0 8px;
+}
+
+.full-tx{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:19px 5px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+
+.full-tx-info{
+  flex:1;
+  min-width:0;
+}
+
+.full-tx-title{
+  font-weight:650;
+  font-size:16px;
+}
+
+.full-tx-sub{
+  color:#788298;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.full-tx-amount{
+  font-size:17px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.outgoing{
+  color:#292537;
+}
+
+.incoming{
+  color:#159050;
+}
+
+.statement-btn{
+  position:fixed;
+  bottom:82px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:410px;
+  width:calc(100% - 44px);
+  padding:17px;
+  border-radius:30px;
+  background:#fff;
+  color:var(--purple);
+  box-shadow:0 10px 35px rgba(0,0,0,.15);
+  font-weight:700;
+  z-index:30;
+}
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
+
+.account-option{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  color:var(--text);
+  text-align:left;
+}
+
+.account-option:last-child{
+  border-bottom:0;
+}
+
+.account-option-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.option-icon{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:#f0ebff;
+  color:var(--purple);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.account-details-grid{
+  display:grid;
+  gap:13px;
+}
+
+.detail-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:13px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.detail-row:last-child{
+  border-bottom:0;
+}
+
+.detail-label{
+  color:var(--muted);
+}
+
+.detail-value{
+  font-weight:700;
+  text-align:right;
+}
+
+/* =====================================================
+   SUPPORT
+===================================================== */
+
+.support-modal{
+  position:fixed;
+  inset:0;
+  z-index:400;
+  background:rgba(20,18,31,.48);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.support-modal.show{
+  display:flex;
+}
+
+.support-sheet{
+  width:100%;
+  max-width:460px;
+  background:#fff;
+  border-radius:28px 28px 0 0;
+  padding:25px 22px 35px;
+  animation:sheetUp .25s ease;
+}
+
+@keyframes sheetUp{
+  from{
+    transform:translateY(100%);
+  }
+  to{
+    transform:translateY(0);
+  }
+}
+
+.sheet-handle{
+  width:45px;
+  height:5px;
+  background:#d8d5df;
+  border-radius:5px;
+  margin:0 auto 23px;
+}
+
+.support-sheet h2{
+  margin:0 0 8px;
+}
+
+.support-sheet p{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.support-option{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:17px;
+  border-radius:17px;
+  background:#f7f5fb;
+  margin-top:10px;
+  color:var(--text);
+  text-align:left;
+}
+
+.support-option-icon{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  background:#eee8ff;
+  color:var(--purple);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.close-support{
+  width:100%;
+  margin-top:15px;
+  padding:15px;
+  background:#eeeaf7;
+  color:var(--purple);
+  border-radius:15px;
+}
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+  position:fixed;
+  z-index:100;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:460px;
+  background:#fff;
+  border-top:1px solid #e5e2ea;
+  display:flex;
+  justify-content:space-around;
+  padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+}
+
+.nav-btn{
+  flex:1;
+  background:transparent;
+  color:#aaa8b3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  font-size:12px;
+}
+
+.nav-btn .nav-icon{
+  font-size:25px;
+  line-height:1;
+}
+
+.nav-btn.active{
+  color:#4e18c6;
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:95px;
+  transform:translateX(-50%) translateY(20px);
+  background:#17152a;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:20px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:700;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:380px){
+
+  .login-content h1{
+    font-size:39px;
+  }
+
+  .pin-box{
+    width:49px;
+    height:90px;
+  }
+
+  .carbon-brand{
+    font-size:34px;
+  }
+
+  .profile-wrap,
+  .profile-ring{
+    width:62px;
+    height:62px;
+  }
+
+  .quick-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .copy-account-number{
+    font-size:18px;
+  }
+
+  .profile-login-orbit{
+    width:220px;
+    height:220px;
+  }
+
+  .profile-login-photo-ring{
+    width:165px;
+    height:165px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+<div class="phone">
+
+<section id="profileLogin" class="screen active">
+
+  <div class="profile-login-content">
+
+    <div class="profile-login-brand">
+      carbon
+    </div>
+
+    <div class="profile-login-orbit">
+
+      <div class="profile-login-photo-ring">
+
+        <img
+          class="profile-login-photo"
+          src="https://i.ibb.co/ksJb4nY0/IMG-1776.jpg"
+          alt="Esther profile photo"
+        >
+
+      </div>
+
+    </div>
+
+    <div class="profile-login-title">
+      Welcome back, Esther
+    </div>
+
+    <div class="profile-login-subtitle">
+      Your Carbon account is ready
+    </div>
+
+    <button
+      class="profile-login-button"
+      type="button"
+      onclick="go('welcome')"
+    >
+      Continue
+    </button>
+
+  </div>
+
+</section>
+
+<section id="welcome" class="screen">
+
+  <div class="login-top">
+
+    <div class="carbon-brand">
+      <div class="carbon-mark"></div>
+      <span>carbon</span>
+    </div>
+
+    <button class="help-circle" type="button" onclick="showSupport()">
+      ?
+    </button>
+
+  </div>
+
+  <div class="login-content">
+
+    <h1>
+      Welcome back,<br>
+      Esther!
+    </h1>
+
+    <div class="login-subtitle">
+      Enter your login PIN
+    </div>
+
+    <div class="pin-row">
+      <div class="pin-box"></div>
+      <div class="pin-box"></div>
+      <div class="pin-box"></div>
+      <div class="pin-box"></div>
+      <div class="pin-box"></div>
+      <div class="pin-box"></div>
+    </div>
+
+    <button class="forgot-pin" type="button"
+      onclick="showToast('PIN recovery selected')">
+      Forgot PIN?
+    </button>
+
+    <button class="face-id-trigger" type="button"
+      onclick="startFaceID()">
+
+      <div class="face-icon">
+        <span class="tl"></span>
+        <span class="tr"></span>
+        <span class="bl"></span>
+        <span class="br"></span>
+        <span class="eye1"></span>
+        <span class="eye2"></span>
+        <span class="nose"></span>
+        <span class="smile"></span>
+      </div>
+
+      <div class="face-label">
+        Use Face ID
+      </div>
+
+    </button>
+
+  </div>
+
+  <button class="signout" type="button"
+    onclick="showToast('Signed out')">
+    Sign out
+  </button>
+
+</section>
+
+<section id="home" class="screen">
+
+<div class="home-page">
+
+  <div class="home-header">
+
+    <div class="user-heading">
+
+      <div class="profile-wrap">
+
+        <div class="profile-ring">
+
+          <img
+            class="profile-image"
+            src="https://i.ibb.co/ksJb4nY0/IMG-1776.jpg"
+            alt="Esther profile photo"
+          >
+
+        </div>
+
+        <div class="profile-badge">3</div>
+
+      </div>
+
+      <h2>Hi ESTHER</h2>
+
+    </div>
+
+    <div class="home-actions">
+
+      <button class="help-pill" type="button"
+        onclick="openWhatsApp()">
+
+        <span class="headset">◉</span>
+        <span class="help-word">Help</span>
+
+      </button>
+
+      <button class="notify-btn" type="button"
+        onclick="showNotifications()">
+
+        ♟
+        <span class="notify-dot"></span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="smart-banner">
+
+    <div class="smart-track">
+      Make your money smarter&nbsp;&nbsp; • &nbsp;&nbsp;
+      Make your money smarter&nbsp;&nbsp; • &nbsp;&nbsp;
+      Make your money smarter
+    </div>
+
+  </div>
+
+  <div class="hero-card">
+
+    <div class="hero-top">
+
+      <div class="hero-brand">
+        carbon
+      </div>
+
+      <div>•••</div>
+
+    </div>
+
+    <div class="hero-label">
+      Main account
+    </div>
+
+    <div class="hero-label">
+      Available balance
+    </div>
+
+    <div class="hero-balance">
+      ₦0.00
+    </div>
+
+    <div class="hero-actions">
+
+      <button class="add-money"
+        type="button"
+        onclick="go('payment')">
+        Add Money
+      </button>
+
+      <button class="send-money"
+        type="button"
+        onclick="go('payment')">
+        Send Money
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="balance-stack">
+
+    <button class="balance-card"
+      type="button"
+      onclick="go('savings')">
+
+      <div>
+        <small>Savings</small>
+        <strong>₦0.00</strong>
+      </div>
+
+      <span>→</span>
+
+    </button>
+
+    <button class="balance-card"
+      type="button"
+      onclick="go('credits')">
+
+      <div>
+        <small>Available Credit</small>
+        <strong>₦0.00</strong>
+      </div>
+
+      <span>→</span>
+
+    </button>
+
+    <button class="balance-card"
+      type="button"
+      onclick="go('payment')">
+
+      <div>
+        <small>Main Account</small>
+        <strong>₦0.00</strong>
+      </div>
+
+      <span>→</span>
+
+    </button>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-heading">
+      <h3>Quick access</h3>
+    </div>
+
+    <div class="quick-grid">
+
+      <button class="quick-item" type="button"
+        onclick="go('payment')">
+        <span class="quick-icon">＋</span>
+        Add Money
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('payment')">
+        <span class="quick-icon">↗</span>
+        Send Money
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('credits')">
+        <span class="quick-icon">▣</span>
+        Credits
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('reports')">
+        <span class="quick-icon">▤</span>
+        Reports
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('cards')">
+        <span class="quick-icon">▰</span>
+        Cards
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('bills')">
+        <span class="quick-icon">◉</span>
+        Bills
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('savings')">
+        <span class="quick-icon">▱</span>
+        Savings
+      </button>
+
+      <button class="quick-item" type="button"
+        onclick="go('loans')">
+        <span class="quick-icon">₦</span>
+        Loans
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="info-card">
+
+      <strong>Credit report</strong>
+
+      <p>
+        View your credit information and account activity.
+      </p>
+
+      <button
+        type="button"
+        onclick="go('credits')"
+        style="background:transparent;color:#6d35e8;font-weight:700;padding:0"
+      >
+        View report →
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="transactions-preview">
+
+      <div class="transaction-head">
+
+        <h3>Transactions</h3>
+
+        <button
+          class="view-all"
+          type="button"
+          onclick="go('transactions')"
+        >
+          View all
+        </button>
+
+      </div>
+
+      <button class="preview-row"
+        type="button"
+        onclick="openTransaction('Loan / VAT charge','19 Aug 2025 · Applicable charge')">
+
+        <div class="tx-icon tx-out">↗</div>
+
+        <div class="preview-main">
+
+          <div class="preview-title">
+            Loan / VAT charge
+          </div>
+
+          <div class="preview-date">
+            19 Aug 2025 · Applicable charge
+          </div>
+
+        </div>
+
+        <div class="preview-amount">
+          Recorded
+        </div>
+
+      </button>
+
+      <button class="preview-row"
+        type="button"
+        onclick="openTransaction('Loan disbursement','20 Aug 2025 · Loan 02')">
+
+        <div class="tx-icon tx-in">↙</div>
+
+        <div class="preview-main">
+
+          <div class="preview-title">
+            Loan disbursement
+          </div>
+
+          <div class="preview-date">
+            20 Aug 2025 · Loan 02
+          </div>
+
+        </div>
+
+        <div class="preview-amount">
+          +₦455,000
+        </div>
+
+      </button>
+
+      <button class="preview-row"
+        type="button"
+        onclick="openTransaction('Transfer to Hadassah Opemipo Oluwabusuyi','19 Sep 2025 · OPay · 9016211791')">
+
+        <div class="tx-icon tx-out">↗</div>
+
+        <div class="preview-main">
+
+          <div class="preview-title">
+            Transfer to Hadassah Opemipo Oluwabusuyi
+          </div>
+
+          <div class="preview-date">
+            19 Sep 2025 · OPay ••••1791
+          </div>
+
+        </div>
+
+        <div class="preview-amount">
+          —
+        </div>
+
+      </button>
+
+      <button class="preview-row"
+        type="button"
+        onclick="openTransaction('Transfer to Hadassah Opemipo Oluwabusuyi','28 Sep 2025 · OPay · 9016211791')">
+
+        <div class="tx-icon tx-out">↗</div>
+
+        <div class="preview-main">
+
+          <div class="preview-title">
+            Transfer to Hadassah Opemipo Oluwabusuyi
+          </div>
+
+          <div class="preview-date">
+            28 Sep 2025 · OPay ••••1791
+          </div>
+
+        </div>
+
+        <div class="preview-amount">
+          —
+        </div>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <h3>Loan activity</h3>
+
+      <button type="button"
+        onclick="go('loans')">
+        View loans
+      </button>
+
+    </div>
+
+    <div class="loan-activity">
+
+      <button class="activity-row"
+        type="button"
+        onclick="go('loan1')">
+
+        <div class="activity-left">
+
+          <div class="activity-icon">₦</div>
+
+          <div>
+            <strong>Loan disbursement</strong>
+
+            <div style="color:#888;font-size:13px">
+              Loan 01 · 19 Aug 2025
+            </div>
+          </div>
+
+        </div>
+
+        <strong>+₦759,000</strong>
+
+      </button>
+
+      <button class="activity-row"
+        type="button"
+        onclick="go('loan2')">
+
+        <div class="activity-left">
+
+          <div class="activity-icon">₦</div>
+
+          <div>
+            <strong>Loan disbursement</strong>
+
+            <div style="color:#888;font-size:13px">
+              Loan 02 · 20 Aug 2025
+            </div>
+          </div>
+
+        </div>
+
+        <strong>+₦455,000</strong>
+
+      </button>
+
+      <button class="activity-row"
+        type="button"
+        onclick="go('transactions')">
+
+        <div class="activity-left">
+
+          <div class="activity-icon">↗</div>
+
+          <div>
+            <strong>Loan account activity</strong>
+
+            <div style="color:#888;font-size:13px">
+              View transaction activity
+            </div>
+          </div>
+
+        </div>
+
+        <span style="color:#6d35e8;font-weight:700">
+          View
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="need-help">
+
+      <strong>Need help?</strong>
+
+      <p style="color:#d7d4e0">
+        Contact customer support.
+      </p>
+
+      <button
+        type="button"
+        onclick="openWhatsApp()"
+        style="background:#fff;color:#6d35e8;border-radius:13px;padding:11px 15px;font-weight:700"
+      >
+        Contact support
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+<section id="savings" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Savings</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Total savings</h3>
+
+    <div style="font-size:36px;font-weight:800">
+      ₦0.00
+    </div>
+
+    <p>
+      Manage your savings from here.
+    </p>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Cash Vault selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Cash Vault</h3>
+
+    <p>
+      Save money securely in your Carbon account.
+    </p>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('FlexSave selected')"
+    style="width:100%;text-align:left">
+
+    <h3>FlexSave</h3>
+
+    <p>
+      Flexible savings for your financial goals.
+    </p>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Goals selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Goals</h3>
+
+    <p>
+      Create and manage your savings goals.
+    </p>
+
+  </button>
+
+</div>
+</section>
+
+<section id="payment" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Payment</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Carbon account number</h3>
+
+    <p>
+      Your account number is available here for copying whenever you need it.
+    </p>
+
+    <div class="copy-account">
+
+      <span class="copy-account-number">
+        4607145674
+      </span>
+
+      <button
+        class="copy-button"
+        type="button"
+        onclick="copyText('4607145674')"
+      >
+        Copy
+      </button>
+
+    </div>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Add money selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Add Money</h3>
+
+    <p>
+      Add money to your Carbon account.
+    </p>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Send money selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Send Money</h3>
+
+    <p>
+      Make a transfer from your main account.
+    </p>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('bills')"
+    style="width:100%;text-align:left">
+
+    <h3>Bills</h3>
+
+    <p>
+      Airtime, Data and Utilities.
+    </p>
+
+  </button>
+
+</div>
+</section>
+
+<section id="loans" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Loans</h1>
+
+  </div>
+
+  <!-- CONSOLIDATED OUTSTANDING BALANCE FROM PROVIDED ACCOUNT UPDATE -->
+
+  <div class="simple-card">
+
+    <h3>Combined outstanding balance</h3>
+
+    <div style="font-size:32px;font-weight:800;color:#6d35e8">
+      ₦1,463,059.94
+    </div>
+
+    <p>
+      Updated combined outstanding balance as at 1 October 2026.
+    </p>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('loan1')"
+    style="width:100%;text-align:left">
+
+    <h3>Loan 01</h3>
+
+    <p>
+      Original disbursement: ₦759,000
+    </p>
+
+    <p>
+      Disbursed: 19 August 2025
+    </p>
+
+    <p>
+      Repayment due: 18 September 2025
+    </p>
+
+    <strong style="color:#d94757">
+      Overdue
+    </strong>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('loan2')"
+    style="width:100%;text-align:left">
+
+    <h3>Loan 02</h3>
+
+    <p>
+      Original disbursement: ₦455,000
+    </p>
+
+    <p>
+      Disbursed: 20 August 2025
+    </p>
+
+    <p>
+      Repayment due: 19 September 2025
+    </p>
+
+    <strong style="color:#d94757">
+      Overdue
+    </strong>
+
+  </button>
+
+</div>
+</section>
+
+<section id="loan1" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('loans')">
+      ‹
+    </button>
+
+    <h1>Loan 01</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Loan details</h3>
+
+    <div class="account-details-grid">
+
+      <div class="detail-row">
+        <span class="detail-label">Principal</span>
+        <span class="detail-value">₦759,000</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Disbursed</span>
+        <span class="detail-value">19 Aug 2025</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Due date</span>
+        <span class="detail-value">18 Sep 2025</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Term</span>
+        <span class="detail-value">30 days</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Interest</span>
+        <span class="detail-value">4.5%</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Late fee</span>
+        <span class="detail-value">0.03333% / day</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Current principal</span>
+        <span class="detail-value">₦759,000</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('transactions')"
+    style="width:100%;text-align:left">
+
+    <h3>Loan activity</h3>
+
+    <p>
+      View all recorded Loan 01 transaction activity.
+    </p>
+
+    <strong style="color:#6d35e8">
+      View transaction history →
+    </strong>
+
+  </button>
+
+  <div class="simple-card">
+
+    <h3>Original disbursement</h3>
+
+    <p>19 August 2025</p>
+
+    <strong style="font-size:28px">
+      ₦759,000
+    </strong>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Repayment due date</h3>
+
+    <p>
+      18 September 2025
+    </p>
+
+  </div>
+
+</div>
+</section>
+
+<section id="loan2" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('loans')">
+      ‹
+    </button>
+
+    <h1>Loan 02</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Loan details</h3>
+
+    <div class="account-details-grid">
+
+      <div class="detail-row">
+        <span class="detail-label">Principal</span>
+        <span class="detail-value">₦455,000</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Disbursed</span>
+        <span class="detail-value">20 Aug 2025</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Due date</span>
+        <span class="detail-value">19 Sep 2025</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Term</span>
+        <span class="detail-value">30 days</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Interest</span>
+        <span class="detail-value">4.5%</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Late fee</span>
+        <span class="detail-value">0.03333% / day</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Current principal</span>
+        <span class="detail-value">₦455,000</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('transactions')"
+    style="width:100%;text-align:left">
+
+    <h3>Loan activity</h3>
+
+    <p>
+      View all recorded Loan 02 transaction activity.
+    </p>
+
+    <strong style="color:#6d35e8">
+      View transaction history →
+    </strong>
+
+  </button>
+
+  <div class="simple-card">
+
+    <h3>Original disbursement</h3>
+
+    <p>20 August 2025</p>
+
+    <strong style="font-size:28px">
+      ₦455,000
+    </strong>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Repayment due date</h3>
+
+    <p>
+      19 September 2025
+    </p>
+
+  </div>
+
+</div>
+</section>
+
+<section id="transactions" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Transactions</h1>
+
+  </div>
+
+  <div class="transaction-tabs">
+
+    <button
+      class="transaction-tab active"
+      type="button"
+      onclick="setTransactionTab(this,'all')">
+      All
+    </button>
+
+    <button
+      class="transaction-tab"
+      type="button"
+      onclick="setTransactionTab(this,'incoming')">
+      Incoming
+    </button>
+
+    <button
+      class="transaction-tab"
+      type="button"
+      onclick="setTransactionTab(this,'outgoing')">
+      Outgoing
+    </button>
+
+  </div>
+
+  <div class="tx-date-heading">
+    August 2025
+  </div>
+
+  <button class="full-tx incoming-row"
+    type="button"
+    onclick="openTransaction('Loan disbursement','19 Aug 2025 · Loan 01 · +₦759,000')">
+
+    <div class="tx-icon tx-in">↙</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Loan disbursement
+      </div>
+
+      <div class="full-tx-sub">
+        19 Aug 2025 · Loan 01
+      </div>
+
+    </div>
+
+    <div class="full-tx-amount incoming">
+      +₦759,000
+    </div>
+
+  </button>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Loan / VAT charge','19 Aug 2025 · Applicable charge')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Loan / VAT charge
+      </div>
+
+      <div class="full-tx-sub">
+        19 Aug 2025 · Applicable charge
+      </div>
+
+    </div>
+
+    <div class="full-tx-amount">
+      Recorded
+    </div>
+
+  </button>
+
+  <button class="full-tx incoming-row"
+    type="button"
+    onclick="openTransaction('Loan disbursement','20 Aug 2025 · Loan 02 · +₦455,000')">
+
+    <div class="tx-icon tx-in">↙</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Loan disbursement
+      </div>
+
+      <div class="full-tx-sub">
+        20 Aug 2025 · Loan 02
+      </div>
+
+    </div>
+
+    <div class="full-tx-amount incoming">
+      +₦455,000
+    </div>
+
+  </button>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Loan / VAT charge','20 Aug 2025 · Applicable charge')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Loan / VAT charge
+      </div>
+
+      <div class="full-tx-sub">
+        20 Aug 2025 · Applicable charge
+      </div>
+
+    </div>
+
+    <div class="full-tx-amount">
+      Recorded
+    </div>
+
+  </button>
+
+  <div class="tx-date-heading">
+    September 2025
+  </div>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Loan overdue activity','Loan 01 · Recorded in 2025')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Loan overdue activity
+      </div>
+
+      <div class="full-tx-sub">
+        Loan 01 · Repayment due 18 Sep 2025
+      </div>
+
+    </div>
+
+    <span style="color:#6d35e8;font-weight:700">
+      View
+    </span>
+
+  </button>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Loan overdue activity','Loan 02 · Recorded in 2025')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Loan overdue activity
+      </div>
+
+      <div class="full-tx-sub">
+        Loan 02 · Repayment due 19 Sep 2025
+      </div>
+
+    </div>
+
+    <span style="color:#6d35e8;font-weight:700">
+      View
+    </span>
+
+  </button>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Credit activity','Credit report access · 2025')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Credit activity
+      </div>
+
+      <div class="full-tx-sub">
+        Credit report access · 2025
+      </div>
+
+    </div>
+
+    <span style="color:#6d35e8;font-weight:700">
+      View
+    </span>
+
+  </button>
+
+  <div class="tx-date-heading">
+    September 2025 — OPay
+  </div>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Transfer to Hadassah Opemipo Oluwabusuyi','19 Sep 2025 · OPay · 9016211791')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Transfer to Hadassah Opemipo Oluwabusuyi
+      </div>
+
+      <div class="full-tx-sub">
+        19 Sep 2025 · OPay · 9016211791
+      </div>
+
+    </div>
+
+    <div class="full-tx-amount outgoing">
+      —
+    </div>
+
+  </button>
+
+  <button class="full-tx outgoing-row"
+    type="button"
+    onclick="openTransaction('Transfer to Hadassah Opemipo Oluwabusuyi','28 Sep 2025 · OPay · 9016211791')">
+
+    <div class="tx-icon tx-out">↗</div>
+
+    <div class="full-tx-info">
+
+      <div class="full-tx-title">
+        Transfer to Hadassah Opemipo Oluwabusuyi
+      </div>
+
+      <div class="full-tx-sub">
+        28 Sep 2025 · OPay · 9016211791
+      </div>
+
+    </div>
+
+    <div class="full-tx-amount outgoing">
+      —
+    </div>
+
+  </button>
+
+</div>
+
+<button
+  class="statement-btn"
+  type="button"
+  onclick="showToast('Statement request selected')"
+>
+  ✉ &nbsp; Get statement
+</button>
+
+</section>
+
+<section id="credits" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Credits</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Available credit</h3>
+
+    <div style="font-size:36px;font-weight:800">
+      ₦0.00
+    </div>
+
+    <p>
+      No current credit offer.
+    </p>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('reports')"
+    style="width:100%;text-align:left">
+
+    <h3>Credit report</h3>
+
+    <p>
+      Review your credit information and account activity.
+    </p>
+
+    <strong style="color:#6d35e8">
+      View report →
+    </strong>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="go('transactions')"
+    style="width:100%;text-align:left">
+
+    <h3>Loan history</h3>
+
+    <p>
+      View recorded loan and credit activity.
+    </p>
+
+  </button>
+
+</div>
+</section>
+
+<section id="reports" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Reports</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Credit report</h3>
+
+    <div style="font-size:28px;font-weight:800">
+      Level 3
+    </div>
+
+    <p>
+      Account holder: Esther Opemipo Oluwabusuyi
+    </p>
+
+  </div>
+
+  <div class="simple-card">
+
+    <div class="detail-row">
+      <span class="detail-label">Client ID</span>
+      <span class="detail-value">257013053</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Loan account</span>
+      <span class="detail-value">01</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Loan status</span>
+      <span class="detail-value">Overdue</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Loan account</span>
+      <span class="detail-value">02</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Loan status</span>
+      <span class="detail-value">Overdue</span>
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+<section id="cards" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Cards</h1>
+
+  </div>
+
+  <div
+    style="
+      background:linear-gradient(135deg,#5420bd,#8557ef);
+      color:#fff;
+      border-radius:24px;
+      padding:24px;
+      min-height:205px;
+      box-shadow:0 18px 35px rgba(92,44,208,.22);
+    "
+  >
+
+    <div style="font-size:25px;font-weight:800">
+      carbon
+    </div>
+
+    <div style="margin-top:48px;font-size:24px;letter-spacing:3px">
+      •••• •••• •••• 0000
+    </div>
+
+    <div style="margin-top:25px;font-size:13px">
+      ESTHER OLUWABUSUYI
+    </div>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Card activity selected')"
+    style="width:100%;text-align:left;margin-top:14px">
+
+    <h3>Card security & activity</h3>
+
+    <p>
+      Review your card security and activity information.
+    </p>
+
+  </button>
+
+</div>
+</section>
+
+<section id="bills" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Pay Bills</h1>
+
+  </div>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Airtime selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Airtime</h3>
+
+    <p>
+      Buy airtime.
+    </p>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Data selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Data</h3>
+
+    <p>
+      Purchase data.
+    </p>
+
+  </button>
+
+  <button class="simple-card"
+    type="button"
+    onclick="showToast('Utilities selected')"
+    style="width:100%;text-align:left">
+
+    <h3>Utilities</h3>
+
+    <p>
+      Manage utility payments.
+    </p>
+
+  </button>
+
+</div>
+</section>
+
+<section id="account" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('home')">
+      ‹
+    </button>
+
+    <h1>Account</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <div style="display:flex;align-items:center;gap:14px">
+
+      <div class="profile-wrap">
+
+        <div class="profile-ring">
+
+          <img
+            class="profile-image"
+            src="https://i.ibb.co/ksJb4nY0/IMG-1776.jpg"
+            alt="Esther profile photo"
+          >
+
+        </div>
+
+        <div class="profile-badge">
+          3
+        </div>
+
+      </div>
+
+      <div>
+
+        <strong style="font-size:21px">
+          Esther Opemipo Oluwabusuyi
+        </strong>
+
+        <div style="color:#777;margin-top:4px">
+          Carbon account
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Carbon account number</h3>
+
+    <div class="copy-account">
+
+      <span class="copy-account-number">
+        4607145674
+      </span>
+
+      <button
+        class="copy-button"
+        type="button"
+        onclick="copyText('4607145674')"
+      >
+        Copy
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="simple-card"
+    style="padding:0">
+
+    <button
+      class="account-option"
+      type="button"
+      onclick="go('loans')"
+    >
+
+      <div class="account-option-left">
+
+        <div class="option-icon">
+          ₦
+        </div>
+
+        <div>
+
+          <strong>Loans</strong>
+
+          <div style="color:#888;font-size:13px">
+            Loan accounts and activity
+          </div>
+
+        </div>
+
+      </div>
+
+      <span>›</span>
+
+    </button>
+
+    <button
+      class="account-option"
+      type="button"
+      onclick="go('credits')"
+    >
+
+      <div class="account-option-left">
+
+        <div class="option-icon">
+          ▣
+        </div>
+
+        <div>
+
+          <strong>Credit report</strong>
+
+          <div style="color:#888;font-size:13px">
+            Credit information
+          </div>
+
+        </div>
+
+      </div>
+
+      <span>›</span>
+
+    </button>
+
+    <button
+      class="account-option"
+      type="button"
+      onclick="go('transactions')"
+    >
+
+      <div class="account-option-left">
+
+        <div class="option-icon">
+          ↗
+        </div>
+
+        <div>
+
+          <strong>Transaction History</strong>
+
+          <div style="color:#888;font-size:13px">
+            View all account transactions
+          </div>
+
+        </div>
+
+      </div>
+
+      <span>›</span>
+
+    </button>
+
+    <button
+      class="account-option"
+      type="button"
+      onclick="go('kyc')"
+    >
+
+      <div class="account-option-left">
+
+        <div class="option-icon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong>KYC Information</strong>
+
+          <div style="color:#888;font-size:13px">
+            Account verification information
+          </div>
+
+        </div>
+
+      </div>
+
+      <span>›</span>
+
+    </button>
+
+    <button
+      class="account-option"
+      type="button"
+      onclick="go('letter')"
+    >
+
+      <div class="account-option-left">
+
+        <div class="option-icon">
+          ✉
+        </div>
+
+        <div>
+
+          <strong>Letter of Non-indebtedness</strong>
+
+          <div style="color:#888;font-size:13px">
+            Account document
+          </div>
+
+        </div>
+
+      </div>
+
+      <span>›</span>
+
+    </button>
+
+    <button
+      class="account-option"
+      type="button"
+      onclick="openWhatsApp()"
+    >
+
+      <div class="account-option-left">
+
+        <div class="option-icon">
+          ?
+        </div>
+
+        <div>
+
+          <strong>Customer Support</strong>
+
+          <div style="color:#888;font-size:13px">
+            WhatsApp or Email
+          </div>
+
+        </div>
+
+      </div>
+
+      <span>›</span>
+
+    </button>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Account information</h3>
+
+    <div class="account-details-grid">
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Account holder
+        </span>
+
+        <span class="detail-value">
+          Esther Opemipo Oluwabusuyi
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Client ID
+        </span>
+
+        <span class="detail-value">
+          257013053
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Account number
+        </span>
+
+        <span class="detail-value">
+          4607145674
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Joined
+        </span>
+
+        <span class="detail-value">
+          19 Aug 2025
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          KYC
+        </span>
+
+        <span class="detail-value">
+          Level 3 / Tier 3
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+<section id="kyc" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('account')">
+      ‹
+    </button>
+
+    <h1>KYC Information</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Verification status</h3>
+
+    <div style="font-size:30px;font-weight:800">
+      Level 3
+    </div>
+
+    <p>
+      Tier 3 account verification.
+    </p>
+
+  </div>
+
+  <div class="simple-card">
+
+    <div class="account-details-grid">
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Account holder
+        </span>
+
+        <span class="detail-value">
+          Esther Opemipo Oluwabusuyi
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Client ID
+        </span>
+
+        <span class="detail-value">
+          257013053
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Account number
+        </span>
+
+        <span class="detail-value">
+          4607145674
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          KYC level
+        </span>
+
+        <span class="detail-value">
+          Level 3
+        </span>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span class="detail-label">
+          Tier
+        </span>
+
+        <span class="detail-value">
+          Tier 3
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+<section id="letter" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('account')">
+      ‹
+    </button>
+
+    <h1>Letter</h1>
+
+  </div>
+
+  <div class="simple-card"
+    style="text-align:center;padding:30px 20px">
+
+    <div class="carbon-brand"
+      style="justify-content:center;font-size:31px">
+
+      <div class="carbon-mark"
+        style="width:38px;height:38px">
+      </div>
+
+      <span>carbon</span>
+
+    </div>
+
+    <h2 style="margin-top:30px">
+      Letter of Non-indebtedness
+    </h2>
+
+    <p>
+      Account holder:
+      <strong>
+        Esther Opemipo Oluwabusuyi
+      </strong>
+    </p>
+
+    <p>
+      Account number:
+      <strong>
+        4607145674
+      </strong>
+    </p>
+
+    <p>
+      Client ID:
+      <strong>
+        257013053
+      </strong>
+    </p>
+
+    <p style="margin-top:25px">
+
+      This document section is associated with the
+      account record and the recorded loan-status
+      information for the account.
+
+    </p>
+
+    <div style="margin-top:30px">
+      Carbon
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+<section id="support" class="screen">
+
+<div class="inner-page">
+
+  <div class="page-header">
+
+    <button class="back-btn"
+      type="button"
+      onclick="go('account')">
+      ‹
+    </button>
+
+    <h1>Support</h1>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Customer support</h3>
+
+    <p>
+      Choose how you would like to contact customer support.
+    </p>
+
+    <button
+      type="button"
+      onclick="openWhatsApp()"
+      style="width:100%;background:#25D366;color:#fff;padding:15px;border-radius:15px;font-weight:700;margin-top:10px"
+    >
+      WhatsApp
+    </button>
+
+    <div
+      style="width:100%;background:#6d35e8;color:#fff;padding:15px;border-radius:15px;font-weight:700;margin-top:10px;text-align:center"
+    >
+      Email
+    </div>
+
+  </div>
+
+  <div class="simple-card">
+
+    <h3>Support contacts</h3>
+
+    <p>
+      09160356682
+    </p>
+
+    <p>
+      supportgetcarbon@gmail.com
+    </p>
+
+    <p>
+      support@getcarbon.co
+    </p>
+
+    <p>
+      02013301808
+    </p>
+
+  </div>
+
+</div>
+</section>
+
+<nav id="bottomNav" class="bottom-nav">
+
+  <button
+    class="nav-btn active"
+    type="button"
+    data-page="home"
+    onclick="go('home')"
+  >
+    <span class="nav-icon">⬡</span>
+    <span>Home</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    type="button"
+    data-page="savings"
+    onclick="go('savings')"
+  >
+    <span class="nav-icon">▱</span>
+    <span>Savings</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    type="button"
+    data-page="payment"
+    onclick="go('payment')"
+  >
+    <span class="nav-icon">⇄</span>
+    <span>Payment</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    type="button"
+    data-page="loans"
+    onclick="go('loans')"
+  >
+    <span class="nav-icon">♟</span>
+    <span>Loans</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    type="button"
+    data-page="account"
+    onclick="go('account')"
+  >
+    <span class="nav-icon">●</span>
+    <span>Account</span>
+  </button>
+
+</nav>
+
+<div id="faceModal" class="face-modal">
+
+  <div class="face-card">
+
+    <div class="face-scan"></div>
+
+    <div class="face-card-title">
+      Face ID
+    </div>
+
+  </div>
+
+</div>
+
+<div id="supportModal" class="support-modal">
+
+  <div class="support-sheet">
+
+    <div class="sheet-handle"></div>
+
+    <h2>Customer Support</h2>
+
+    <p>
+      Choose how you would like to contact support.
+    </p>
+
+    <button
+      class="support-option"
+      type="button"
+      onclick="openWhatsApp()"
+    >
+
+      <div class="support-option-icon">
+        ☎
+      </div>
+
+      <div>
+
+        <strong>WhatsApp</strong>
+
+        <div style="font-size:13px;color:#777;margin-top:3px">
+          09160356682
+        </div>
+
+      </div>
+
+    </button>
+
+    <div
+      class="support-option"
+      style="cursor:default"
+    >
+
+      <div class="support-option-icon">
+        ✉
+      </div>
+
+      <div>
+
+        <strong>Email</strong>
+
+        <div style="font-size:13px;color:#777;margin-top:3px">
+          supportgetcarbon@gmail.com
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      class="close-support"
+      type="button"
+      onclick="hideSupport()"
+    >
+      Close
+    </button>
+
+  </div>
+
+</div>
+
+<div id="notificationModal"
+     class="support-modal">
+
+  <div class="support-sheet">
+
+    <div class="sheet-handle"></div>
+
+    <h2>Notifications</h2>
+
+    <button
+      class="support-option"
+      type="button"
+      onclick="go('loans');hideNotifications()"
+    >
+
+      <div class="support-option-icon">
+        ₦
+      </div>
+
+      <div>
+
+        <strong>Loan account activity</strong>
+
+        <div style="font-size:13px;color:#777;margin-top:3px">
+          View your loan information
+        </div>
+
+      </div>
+
+    </button>
+
+    <button
+      class="support-option"
+      type="button"
+      onclick="go('transactions');hideNotifications()"
+    >
+
+      <div class="support-option-icon">
+        ↗
+      </div>
+
+      <div>
+
+        <strong>Transaction history</strong>
+
+        <div style="font-size:13px;color:#777;margin-top:3px">
+          Review account transactions
+        </div>
+
+      </div>
+
+    </button>
+
+    <button
+      class="close-support"
+      type="button"
+      onclick="hideNotifications()"
+    >
+      Close
+    </button>
+
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+</div>
+</div>
+
+<script>
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+const navPages = [
+  "home",
+  "savings",
+  "payment",
+  "loans",
+  "account"
+];
+
+function go(page){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
+      screen.classList.remove("active");
+    });
+
+  const target =
+    document.getElementById(page);
+
+  if(!target) return;
+
+  target.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  const bottomNav =
+    document.getElementById("bottomNav");
+
+  if(
+    page === "welcome" ||
+    page === "profileLogin"
+  ){
+    bottomNav.style.display = "none";
+  }else{
+    bottomNav.style.display = "flex";
+  }
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+  const activeNav =
+    document.querySelector(
+      '.nav-btn[data-page="' + page + '"]'
+    );
+
+  if(activeNav){
+    activeNav.classList.add("active");
+  }
+
+}
+
+
+/* =====================================================
+   FACE ID FLOW
+===================================================== */
+
+function startFaceID(){
+
+  const modal =
+    document.getElementById("faceModal");
+
+  modal.classList.add("show");
+
+  setTimeout(()=>{
+
+    modal.classList.remove("show");
+
+    go("home");
+
+  },2400);
+
+}
+
+
+/* =====================================================
+   SUPPORT
+===================================================== */
+
+function showSupport(){
+
+  document
+    .getElementById("supportModal")
+    .classList.add("show");
+
+}
+
+function hideSupport(){
+
+  document
+    .getElementById("supportModal")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   WHATSAPP SUPPORT
+===================================================== */
+
+function openWhatsApp(){
+
+  hideSupport();
+
+  window.location.href =
+    "https://wa.me/2349160356682?text=Hello%20Customer%20Support%2C%20I%20am%20Esther%20Opemipo%20Oluwabusuyi.%20I%20would%20like%20assistance%20with%20my%20Carbon%20account.";
+
+}
+
+
+function openEmail(){
+
+  hideSupport();
+
+}
+
+
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
+
+function showNotifications(){
+
+  document
+    .getElementById("notificationModal")
+    .classList.add("show");
+
+}
+
+function hideNotifications(){
+
+  document
+    .getElementById("notificationModal")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   TRANSACTION TABS
+===================================================== */
+
+function setTransactionTab(button,type){
+
+  document
+    .querySelectorAll(".transaction-tab")
+    .forEach(tab=>{
+      tab.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  const incoming =
+    document.querySelectorAll(".incoming-row");
+
+  const outgoing =
+    document.querySelectorAll(".outgoing-row");
+
+  incoming.forEach(row=>{
+    row.style.display = "";
+  });
+
+  outgoing.forEach(row=>{
+    row.style.display = "";
+  });
+
+  if(type === "incoming"){
+
+    outgoing.forEach(row=>{
+      row.style.display = "none";
+    });
+
+  }
+
+  if(type === "outgoing"){
+
+    incoming.forEach(row=>{
+      row.style.display = "none";
+    });
+
+  }
+
+  showToast(button.innerText + " transactions");
+
+}
+
+
+/* =====================================================
+   TRANSACTION CLICK
+===================================================== */
+
+function openTransaction(title,details){
+
+  showToast(title + " · " + details);
+
+}
+
+
+/* =====================================================
+   COPY
+===================================================== */
+
+function copyText(text){
+
+  if(
+    navigator.clipboard &&
+    window.isSecureContext
+  ){
+
+    navigator.clipboard
+      .writeText(text)
+      .then(()=>{
+        showToast("Account number copied");
+      })
+      .catch(()=>{
+        fallbackCopy(text);
+      });
+
+  }else{
+
+    fallbackCopy(text);
+
+  }
+
+}
+
+
+function fallbackCopy(text){
+
+  const input =
+    document.createElement("textarea");
+
+  input.value = text;
+
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+
+  document.body.appendChild(input);
+
+  input.focus();
+  input.select();
+
+  try{
+
+    document.execCommand("copy");
+
+    showToast("Account number copied");
+
+  }catch(error){
+
+    showToast("Unable to copy");
+
+  }
+
+  document.body.removeChild(input);
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.innerText = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(()=>{
+      toast.classList.remove("show");
+    },2200);
+
+}
+
+
+/* =====================================================
+   CLOSE MODALS BY BACKDROP
+===================================================== */
+
+document
+  .getElementById("supportModal")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+
+      this.classList.remove("show");
+
+    }
+
+  });
+
+
+document
+  .getElementById("faceModal")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+
+      this.classList.remove("show");
+
+    }
+
+  });
+
+
+document
+  .getElementById("notificationModal")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+
+      this.classList.remove("show");
+
+    }
+
+  });
+
+
+/* =====================================================
+   INITIAL STATE
+===================================================== */
+
+document
+  .getElementById("bottomNav")
+  .style.display = "none";
+
+
+document
+  .querySelectorAll("button")
+  .forEach(button=>{
+    button.type = "button";
+  });
+
+</script>
+
+</body>
+</html>
